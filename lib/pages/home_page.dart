@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseconn2/pages/future_list_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -86,6 +87,17 @@ class HomePage extends StatelessWidget {
                 usersReference.doc("id1").delete();
               },
               child: Text("Eliminar"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FutureListPage(),
+                  ),
+                );
+              },
+              child: Text("Future list "),
             ),
           ],
         ),
