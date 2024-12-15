@@ -64,15 +64,31 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                usersReference.add({
-                  "name": "Julio",
-                  "lastname": "Mar",
-                  "age": 35,
-                  "weigth": 80,
-                }).then((value) {
-                  print(value);
-                  print(value.id);
-                });
+                // usersReference.add({
+                //   "name": "Julio",
+                //   "lastname": "Mar",
+                //   "age": 35,
+                //   "weigth": 80,
+                // }).then((value) {
+                //   print(value);
+                //   print(value.id);
+                // });
+
+                UserModel newUser = UserModel(
+                  id: '',
+                  name: "Julio",
+                  lastname: "Martinez",
+                  age: 35,
+                  heigth: 58,
+                  weight: 52,
+                );
+
+                //usamos el metodo tomap para convertir el objeto en un mapa
+                usersReference.add(newUser.toMap()).then(
+                  (value) {
+                    print("Nuevo usuario agregado con el id ${value.id}");
+                  },
+                );
               },
               child: Text("Agregar usuario"),
             ),
