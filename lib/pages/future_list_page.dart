@@ -19,8 +19,22 @@ class FutureListPage extends StatelessWidget {
             print("connectionState: ${snapshot.connectionState}");
             print("data:  ${snapshot.data}");
             print("------------------------------");
-
-            return Container();
+            if (snapshot.hasData) {
+              QuerySnapshot userCollection = snapshot.data;
+              List<QueryDocumentSnapshot> docs = userCollection.docs;
+              return ListView.builder(
+                itemCount: docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text(docs[index]["name"]),
+                    subtitle: Text(docs[index]["lastname"]),
+                  );
+                },
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
       ),
