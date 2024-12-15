@@ -34,7 +34,7 @@ class _StreamPageState extends State<StreamPage> {
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: Text("Stream Page"),
+        title: Text("Single Stream Page"),
       ),
       body: Center(
         child: StreamBuilder(
