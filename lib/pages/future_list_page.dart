@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseconn2/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class FutureListPage extends StatelessWidget {
@@ -22,12 +23,17 @@ class FutureListPage extends StatelessWidget {
             if (snapshot.hasData) {
               QuerySnapshot userCollection = snapshot.data;
               List<QueryDocumentSnapshot> docs = userCollection.docs;
+              List<UserModel> users = docs.map((doc) {
+                return UserModel.fromMap(
+                    doc.data() as Map<String, dynamic>, doc.id);
+              }).toList();
+
               return ListView.builder(
-                itemCount: docs.length,
+                itemCount: users.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Text(docs[index]["name"]),
-                    subtitle: Text(docs[index]["lastname"]),
+                    title: Text(users[index].name),
+                    subtitle: Text(users[index].lastname),
                   );
                 },
               );
