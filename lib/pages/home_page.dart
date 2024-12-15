@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseconn2/models/user_model.dart';
 import 'package:firebaseconn2/pages/future_list_page.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,23 @@ class HomePage extends StatelessWidget {
                   print(value);
                   QuerySnapshot userCollection = value;
                   List<QueryDocumentSnapshot> docs = userCollection.docs;
-                  print(docs);
-                  docs.forEach((element) {
-                    print(element.data());
+                  // print(docs);
+                  // docs.forEach((element) {
+                  //   print(element.data());
+                  // });
+
+                  //Usando el modelo User en lugar del map directo
+                  List<UserModel> users = docs.map((doc) {
+                    return UserModel.fromMap(
+                        doc.data() as Map<String, dynamic>, doc.id);
+                  }).toList();
+
+                  users.forEach((user) {
+                    print(user.id);
+                    print(user.name);
+                    print(user.lastname);
+                    print(user.age);
+                    print("-....................-");
                   });
                 });
               },
